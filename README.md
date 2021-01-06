@@ -1,8 +1,3 @@
-# Canonical Ubuntu 16.04 LTS STIG Overlay
-
-Overlay for the baseline InSpec profile at https://github.com/mitre/canonical-ubuntu-16.04-lts-stig-baseline with modifications based on provided requirements.
-
-
 # canonical-ubuntu-16.04-lts-stig-overlay
 InSpec profile overlay to validate the secure configuration of Canonical Ubuntu 16.04 LTS against [DISA's](https://public.cyber.mil/stigs/) Canonical Ubuntu 16.04 LTS STIG Version 1 Release 1.
 
