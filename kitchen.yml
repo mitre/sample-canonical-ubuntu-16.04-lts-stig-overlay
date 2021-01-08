@@ -1,0 +1,31 @@
+---
+
+verifier:
+  name: inspec
+  sudo: true
+  reporter:
+    - cli
+    - json:spec/results/%{platform}_%{suite}.json
+  inspec_tests:
+    - name: Canonical Ubuntu 16.04 STIG Overlay
+      path: .
+  input_files:
+    - kitchen.inputs.yml
+  load_plugins: true
+
+
+platforms:
+  - name: ubuntu1604
+
+    driver:
+      box: ubuntu/xenial64
+
+suites:
+  - name: vanilla
+    verifier:
+      name: inspec
+provisioner:
+  name: shell
+  
+driver:
+  name: vagrant
