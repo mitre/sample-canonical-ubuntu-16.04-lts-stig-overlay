@@ -1,0 +1,25 @@
+# Emergency user accounts
+emergency_accounts: []
+
+# Temporary user accounts
+temporary_accounts: []
+
+# Known application groups
+application_groups: []
+
+# System accounts that support approved system activities
+known_system_accounts: []
+
+# Accounts that are not allowed on the system
+disallowed_accounts: []
+
+# Accounts of known managed users
+user_accounts: []
+
+# These are `home dir` exempt interactive accounts
+exempt_home_users: []
+
+# Security Personnel accounts
+security_accounts: []
+
+
