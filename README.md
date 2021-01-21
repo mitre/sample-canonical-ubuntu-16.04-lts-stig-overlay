@@ -1,4 +1,4 @@
-# canonical-ubuntu-16.04-lts-stig-overlay
+# sample-canonical-ubuntu-16.04-lts-stig-overlay
 InSpec profile overlay to validate the secure configuration of Canonical Ubuntu 16.04 LTS against [DISA's](https://public.cyber.mil/stigs/) Canonical Ubuntu 16.04 LTS STIG Version 1 Release 1.
 
 ## Getting Started  
@@ -14,51 +14,37 @@ Git is required to download the latest InSpec profiles using the instructions be
 The following inputs must be configured in an inputs ".yml" file for the profile to run correctly for your specific environment. More information about InSpec inputs can be found in the [InSpec Profile Documentation](https://www.inspec.io/docs/reference/profiles/).
 
 ```
-  - name: emergency_accounts
-    description: Emergency user accounts
-    type: Array
-    value: []
+# Emergency user accounts
+emergency_accounts: []
 
-  - name: temporary_accounts
-    description: Temporary user accounts
-    type: Array
-    value: []
+# Temporary user accounts
+temporary_accounts: []
 
-  - name: application_groups
-    description: Known Application Groups
-    type: Array
-    value: []
+# Known application groups
+application_groups: []
 
-  - name: known_system_accounts
-    description: System accounts that support approved system activities
-    type: Array
-    value: []
+# System accounts that support approved system activities
+known_system_accounts: []
 
-  - name: disallowed_accounts
-    description: Accounts that are not allowed on the system
-    type: Array
-    value: []
+# Accounts that are not allowed on the system
+disallowed_accounts: []
 
-  - name: user_accounts
-    description: Accounts of known managed users
-    type: Array
-    value: []
+# Accounts of known managed users
+user_accounts: []
 
-  - name: exempt_home_users
-    description: These are `home dir` exempt interactive accounts
-    type: Array
-    value: []
+# These are `home dir` exempt interactive accounts
+exempt_home_users: []
 
-  - name: security_accounts
-    description: Security Personnel accounts
-    type: Array
-    value: []
+# Security Personnel accounts
+security_accounts: []
+
 ```
+
 ## Running This Overlay Directly from Github
 
 ```
 # How to run
-inspec exec https://github.com/njohnson11/canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
+inspec exec https://github.com/njohnson11/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
 ### Different Run Options
@@ -76,17 +62,17 @@ When the __"runner"__ host uses this profile overlay for the first time, follow 
 ```
 mkdir profiles
 cd profiles
-git clone https://github.com/njohnson11/canonical-ubuntu-16.04-lts-stig-overlay.git
-inspec archive canonical-ubuntu-16.04-lts-stig-overlay
+git clone https://github.com/njohnson11/sample-canonical-ubuntu-16.04-lts-stig-overlay.git
+inspec archive sample-canonical-ubuntu-16.04-lts-stig-overlay
 inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 For every successive run, follow these steps to always have the latest version of this overlay and dependent profiles:
 
 ```
-cd canonical-ubuntu-16.04-lts-stig-overlay
+cd sample-canonical-ubuntu-16.04-lts-stig-overlay
 git pull
 cd ..
-inspec archive canonical-ubuntu-16.04-lts-stig-overlay --overwrite
+inspec archive sample-canonical-ubuntu-16.04-lts-stig-overlay --overwrite
 inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
@@ -98,13 +84,11 @@ The JSON InSpec results file may also be loaded into a __[full heimdall server](
 
 ## Testing the Profile
 
-The included `kitchen.yml`, `bootstrap.sh`, and `kitchen.inputs.yml` files can be used to test the overlay using [Chef Test-Kitchen](https://kitchen.ci/). Start by installing [Chef-Workstation](https://downloads.chef.io/chef-workstation), [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html). Run the following commmand to test the profile:
+The included `kitchen.yml`, `bootstrap.sh`, and `sample.input.yml` files can be used to test the overlay using [Chef Test-Kitchen](https://kitchen.ci/). Start by installing [Chef-Workstation](https://downloads.chef.io/chef-workstation), [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html). Run the following commmand to test the profile:
 
 ```bash
 kitchen test
 ```
-
-
 
 ## Contributing and Getting Help
 To report a bug or feature request, please open an [issue](https://github.com/njohnson11/canonical-ubuntu-16.04-lts-stig-overlay/issues/new).
