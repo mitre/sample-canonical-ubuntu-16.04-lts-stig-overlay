@@ -7,10 +7,10 @@ verifier:
     - cli
     - json:spec/results/%{platform}_%{suite}.json
   inspec_tests:
-    - name: Canonical Ubuntu 16.04 STIG Overlay
+    - name: Sample Canonical Ubuntu 16.04 STIG Overlay
       path: .
   input_files:
-    - kitchen.inputs.yml
+    - sample.inputs.yml
   load_plugins: true
 
 
