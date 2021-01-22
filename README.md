@@ -44,7 +44,7 @@ security_accounts: []
 
 ```
 # How to run
-inspec exec https://github.com/njohnson11/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
+inspec exec https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
 ### Different Run Options
@@ -62,7 +62,7 @@ When the __"runner"__ host uses this profile overlay for the first time, follow 
 ```
 mkdir profiles
 cd profiles
-git clone https://github.com/njohnson11/sample-canonical-ubuntu-16.04-lts-stig-overlay.git
+git clone https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay.git
 inspec archive sample-canonical-ubuntu-16.04-lts-stig-overlay
 inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
@@ -91,7 +91,7 @@ kitchen test
 ```
 
 ## Contributing and Getting Help
-To report a bug or feature request, please open an [issue](https://github.com/njohnson11/sample-canonical-ubuntu-16.04-lts-stig-overlay/issues/new).
+To report a bug or feature request, please open an [issue](https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay/issues/new).
 
 
 ### NOTICE 
