@@ -42,8 +42,9 @@ security_accounts: []
 
 ## Running This Overlay Directly from Github
 
+Run the following command from your __"runner"__ host.
+
 ```
-# How to run
 inspec exec https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
