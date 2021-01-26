@@ -1,5 +1,5 @@
 # sample-canonical-ubuntu-16.04-lts-stig-overlay
-InSpec profile overlay to validate the secure configuration of Canonical Ubuntu 16.04 LTS against [DISA's](https://public.cyber.mil/stigs/) Canonical Ubuntu 16.04 LTS STIG Version 1 Release 1.
+Overlay for the baseline InSpec profile at https://github.com/mitre/canonical-ubuntu-16.04-lts-stig-baseline with modifications based on provided requirements. The baseline InSpec profile is used validate the secure configuration of Canonical Ubuntu 16.04 LTS against [DISA's](https://public.cyber.mil/stigs/) Canonical Ubuntu 16.04 LTS STIG Version 1 Release 1.
 
 ## Getting Started  
 It is intended and recommended that InSpec and this profile be run from a __"runner"__ host (such as a DevOps orchestration server, an administrative management system, or a developer's workstation/laptop) against the target [ remotely over __ssh__].
