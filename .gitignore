@@ -1,0 +1,7 @@
+tests/CanonicalUbuntu1604Overlay/.kitchen/
+tests/CanonicalUbuntu1604Overlay/*.json
+Policyfile.lock.json
+inspec.lock
+spec/
+*.log
+vendor/
