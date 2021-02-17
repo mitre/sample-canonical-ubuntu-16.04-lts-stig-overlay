@@ -1,0 +1,34 @@
+---
+driver:
+  name: vagrant
+  gui: false
+
+provisioner:
+  name: shell 
+
+verifier:
+  name: inspec
+  sudo: true
+  reporter:
+    - cli
+    - json:%{suite}-test-results.json
+  inspec_tests:
+    - name: Canonical Ubuntu 16.04 Overlay 
+      path: ../../ 
+  input_files:
+    - kitchen.vagrant.yml
+  load_plugins: true
+
+platforms:
+  - name: ubuntu-1604
+    driver:
+      name: vagrant
+      vm_hostname: ubuntu-1604 
+      box: ubuntu/xenial64 
+      
+suites:
+  - name: CanonicalUbuntu1604Overlay 
+    verifier:
+      name: inspec
+
+
