@@ -42,15 +42,15 @@ jobs:
           bundle install
       - name: Run kitchen test
         run: |
-          cd test/cookbooks/CanonicalUbuntu1604Overlay/
+          cd test/CanonicalUbuntu1604Overlay/
           bundle exec kitchen list --log-level=debug all || true
           bundle exec kitchen test --destroy=always --log-level=debug ${{ matrix.suite }} || true
       - name: Display our ${{ matrix.suite }} results summary
         run: |
-          cd test/cookbooks/CanonicalUbuntu1604Overlay/
+          cd test/CanonicalUbuntu1604Overlay/
           bundle exec inspec_tools summary -j ${{ matrix.suite }}-test-results.json --json-counts | jq .
       - name: Save Test Result JSON
         uses: actions/upload-artifact@v2
         with:
-          path: test/cookbooks/CanonicalUbuntu1604Overlay/*-results.json
+          path: test/CanonicalUbuntu1604Overlay/*-results.json
           if-no-files-found: error
