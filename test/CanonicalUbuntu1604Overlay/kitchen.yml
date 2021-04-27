@@ -11,7 +11,7 @@ verifier:
   sudo: true
   reporter:
     - cli
-    - json:%{suite}-test-results.json
+    - json:%{platform}-%{suite}-test-results.json
   inspec_tests:
     - name: Canonical Ubuntu 16.04 Overlay 
       path: ../../ 
