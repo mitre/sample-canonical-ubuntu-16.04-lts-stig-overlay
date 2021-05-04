@@ -6,7 +6,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         counter = 0
 
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -39,7 +39,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         ignore_shells = non_interactive_shells.join('|')
     
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -60,7 +60,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         ignore_shells = non_interactive_shells.join('|')
 
     	# If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -82,7 +82,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
     
         findings = Set[]
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -104,15 +104,16 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         non_interactive_shells = input('non_interactive_shells')
         ignore_shells = non_interactive_shells.join('|')
       
-        findings = Set[]
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
                 expect(bad_users).to be_empty, failure_message
             end
         end
+        
+        findings = Set[]
         users.where { (shell != nil && !shell.match(ignore_shells)) && (uid >= 1000 || uid == 0) }.entries.each do |user_info|
           next if exempt_home_users.include?(user_info.username.to_s)
       
@@ -126,7 +127,16 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
     control 'V-75569' do
         non_interactive_shells = input('non_interactive_shells')
         ignore_shells = non_interactive_shells.join('|')
-    
+    	
+        # If shell is nil we should note that
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
+        describe 'Specified shell for users in /etc/passwd' do
+            it 'should specify a shell' do
+                failure_message = "Users without shells set: #{bad_users.join(', ')}"
+                expect(bad_users).to be_empty, failure_message
+            end
+        end
+
         findings = Set[]
         users.where { (shell != nil && !shell.match(ignore_shells)) && (uid >= 1000 || uid == 0) }.entries.each do |user_info|
             dot_files = command("find #{user_info.home} -xdev -maxdepth 1 -name '.*' -type f").stdout.split("\n")
@@ -148,7 +158,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
     
         findings = Set[]
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -199,7 +209,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
     
             dotfiles = Set[]
             # If shell is nil we should note that
-            bad_users = users.where { shell == nil }.entries
+            bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
             describe 'Specified shell for users in /etc/passwd' do
                 it 'should specify a shell' do
                     failure_message = "Users without shells set: #{bad_users.join(', ')}"
@@ -233,7 +243,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         ignore_shells = non_interactive_shells.join('|')
         
         # If shell is nil we should note that
-        bad_users = users.where { shell == nil }.entries
+        bad_users = users.where { shell == nil }.raw_data.map { |user_hash| user_hash[:username] }
         describe 'Specified shell for users in /etc/passwd' do
             it 'should specify a shell' do
                 failure_message = "Users without shells set: #{bad_users.join(', ')}"
