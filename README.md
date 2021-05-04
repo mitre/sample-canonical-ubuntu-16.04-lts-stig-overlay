@@ -7,7 +7,7 @@ It is intended and recommended that InSpec and this profile be run from a __"run
 
 __For the best security of the runner, always install on the runner the _latest version_ of InSpec and supporting Ruby language components.__ 
 
-__The simplest way to install InSpec is to use this command for *nix or Mac:
+__The simplest way to install InSpec is to use this command for *nix or Mac:__
 ```
 curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 ```
