@@ -56,7 +56,7 @@ security_accounts: []
 Run the following command from your __"runner"__ host.
 
 ```
-inspec exec https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
+inspec exec https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay/archive/main.tar.gz --user=<username> --password='<password>' --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
 ### Different Run Options
@@ -76,7 +76,7 @@ mkdir profiles
 cd profiles
 git clone https://github.com/mitre/sample-canonical-ubuntu-16.04-lts-stig-overlay.git
 inspec archive sample-canonical-ubuntu-16.04-lts-stig-overlay
-inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
+inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port>  --user=<username> --password='<password>' --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 For every successive run, follow these steps to always have the latest version of this overlay and dependent profiles:
 
@@ -85,7 +85,7 @@ cd sample-canonical-ubuntu-16.04-lts-stig-overlay
 git pull
 cd ..
 inspec archive sample-canonical-ubuntu-16.04-lts-stig-overlay --overwrite
-inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port> --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
+inspec exec <name of generated archive> --input-file=<path_to_your_inputs_file/name_of_your_inputs_file.yml> -t ssh://<hostname>:<port>  --user=<username> --password='<password>' --sudo --reporter=cli json:<path_to_your_output_file/name_of_your_output_file.json>
 ```
 
 ## Using Heimdall for Viewing the JSON Results
