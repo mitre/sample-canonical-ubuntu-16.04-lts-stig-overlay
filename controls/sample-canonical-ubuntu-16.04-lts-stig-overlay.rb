@@ -1,5 +1,28 @@
 
 include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
+
+    control 'V-75871' do
+	describe file('/etc/nsswitch.conf') do
+    	    it { should exist }
+  	end
+
+  	options = {
+    	    assignment_regex: /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
+  	}
+
+  	dns_entry_exists = parse_config_file('/etc/nsswitch.conf', options).params('hosts')
+	
+  	if dns_entry_exists and dns_entry_exists.match?(/dns/)
+    	    describe 'DNS entry exists in /etc/nsswitch.conf' do
+      	        subject { dns_entry_exists }
+      		it { should be true }
+    	    end
+  	else
+    	    describe file('/etc/resolv.conf') do
+     	        its('content') { should match %r{/^(?!(#.*)).+/m} }
+            end
+        end     
+    end
     control 'V-75461' do
         non_interactive_shells = input('non_interactive_shells')
         ignore_shells = non_interactive_shells.join('|')
@@ -264,7 +287,19 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
         end
     end
-    # Unsure as to whether a profile error is not an expected result here
+    control 'V-75603' do
+        syslog_file = file('/var/log/syslog').exist? ? '/var/log/syslog/' : '/var/log/messages'
+
+        if file(syslog_file).exists? and !file(syslog_file).mode
+            describe 'Manual test' do
+    	        skip 'This control must be reviewed manually'
+            end
+        else
+            describe file(syslog_file) do
+                it { should_not be_more_permissive_than('0640') }
+  	    end
+        end
+    end  
     control 'V-75689' do
         describe package('auditd') do
             it { should be_installed }
@@ -292,6 +327,44 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         end
         describe 'Status listings for any allowed services, ports, or applications must be documented with the organization' do
             skip 'Status listings checks must be preformed manually'
+        end
+    end
+    control 'V-75811' do
+        lines = command('find / -xdev -type d  \( -perm -0002 -a ! -perm -1000 \) -print 2>/dev/null').stdout.lines
+  	if lines.count > 0
+    	    lines.each do |line|
+      	        dir = line.strip
+                if !directory(dir).mode
+      	            describe command("ls -ld #{dir} | cut -d ' ' -f 1 | grep t ").stdout.strip do
+        	        it { should_not be_empty }
+      	            end
+                else
+		    describe directory(dir) do
+        	        it { should be_sticky }
+      		    end
+		end
+    	    end
+  	else
+    	    describe 'Sticky bit has been set on all world writable directories' do
+                subject { lines }
+                its('count') { should eq 0 }
+            end
+        end
+    end
+    control 'V-75597' do
+        if !directory('/var/log').mode or !directory('/var/log').exist?
+            describe 'Manual test' do
+    	        skip 'This control must be reviewed manually'
+            end
+        else
+            describe directory('/var/log') do
+                it { should_not be_more_permissive_than('0770') }
+  	    end
+        end
+    end
+    control 'V-75603' do
+    	describe 'Manual test' do
+    	    skip 'This control must be reviewed manually'
         end
     end
     control 'V-75855' do
