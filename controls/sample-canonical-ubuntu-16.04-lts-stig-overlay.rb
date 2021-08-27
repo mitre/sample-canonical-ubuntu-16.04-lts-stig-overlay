@@ -8,13 +8,14 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
 
   	options = {
     	    assignment_regex: /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
+			      /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
   	}
 
   	dns_entry_exists = parse_config_file('/etc/nsswitch.conf', options).params('hosts')
 	
-  	if dns_entry_exists and dns_entry_exists.match?(/dns/)
+  	if dns_entry_exists
     	    describe 'DNS entry exists in /etc/nsswitch.conf' do
-      	        subject { dns_entry_exists }
+      	        subject { dns_entry_exists.match?(/dns/) }
       		it { should be true }
     	    end
   	else
@@ -288,11 +289,12 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         end
     end
     control 'V-75603' do
-        syslog_file = file('/var/log/syslog').exist? ? '/var/log/syslog/' : '/var/log/messages'
+	# Adding alternative syslog file
+        syslog_file = file('/var/log/syslog').exist? ? '/var/log/syslog' : '/var/log/messages'
 
-        if file(syslog_file).exists? and !file(syslog_file).mode
+        if !file(syslog_file).exist?
             describe 'Manual test' do
-    	        skip 'This control must be reviewed manually'
+    	        skip 'This control must be reviewed manually, as the syslog file cannot be found'
             end
         else
             describe file(syslog_file) do
@@ -381,6 +383,32 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
               it { should be true }
             end
         end
+    end
+    control 'V-75891' do
+	is_postfix_installed = package('postfix').installed?
+	if is_postfix_installed
+            postconf_command = command('postconf -n smtpd_client_restrictions')
+	    postconf_output = postconf_command.stdout.strip
+	    if !postconf_output.empty?
+                smtpd_relay_restrictions = postconf_output.split(' = ')[1].split(', ')
+		describe smtpd_relay_restrictions do
+		    it { should be_in %w[permit_mynetworks permit_sasl_authenticated reject] }
+		end
+	    else
+		describe 'Postfix smtpd command output' do
+		    it 'should describe the smtpd client restrictions' do
+			failure_message = "Postfix smtpd command output was empty, error: #{postconf_command.stderr}"
+			expect(postconf_output.empty?).to cmp true, failure_message
+		    end
+		end
+	    end
+	else
+	    impact 0.0
+	    describe 'Control Not Applicable as postfix is not installed' do
+	        subject { is_postfix_installed }
+	        it { should be false }
+	    end
+	end    
     end
     control 'V-75389' do
         impact 0.0
