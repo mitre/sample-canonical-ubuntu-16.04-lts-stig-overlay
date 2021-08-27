@@ -8,7 +8,6 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
 
   	options = {
     	    assignment_regex: /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
-			      /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
   	}
 
   	dns_entry_exists = parse_config_file('/etc/nsswitch.conf', options).params('hosts')
