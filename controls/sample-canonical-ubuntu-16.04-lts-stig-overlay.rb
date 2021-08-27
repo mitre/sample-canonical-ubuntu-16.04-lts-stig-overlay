@@ -397,7 +397,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
 		describe 'Postfix smtpd command output' do
 		    it 'should describe the smtpd client restrictions' do
 			failure_message = "Postfix smtpd command output was empty, error: #{postconf_command.stderr}"
-			expect(postconf_output.empty?).to cmp true, failure_message
+			expect(postconf_output.empty?).to cmp false, failure_message
 		    end
 		end
 	    end
