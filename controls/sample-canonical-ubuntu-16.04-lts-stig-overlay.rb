@@ -183,11 +183,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 next unless !line.start_with?('export') && !line.start_with?('#')
     
                 if line.strip.empty?
-                curr_work_dir = command('pwd').stdout.gsub("\n", '')
-                line = curr_work_dir if curr_work_dir.start_with?(user_info.home.to_s)
+                    curr_work_dir = command('pwd').stdout.gsub("\n", '')
+                    line = curr_work_dir if curr_work_dir.start_with?(user_info.home.to_s)
                 end
                 findings.add(line) unless line.start_with?(user_info.home)
-            end
+                end
             end
         end
         describe 'Initialization files that include executable search paths that include directories outside their home directories' do
@@ -264,11 +264,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
         end
     end
-    # Unsure as to whether a profile error is not an expected result here
     control 'V-75689' do
-        describe package('auditd') do
-            it { should be_installed }
-        end
         if package('auditd').installed?
             if os.arch == 'x86_64'
                 describe auditd.syscall('execve').where { arch == 'b64' } do
@@ -279,6 +275,10 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             describe auditd.syscall('execve').where { arch == 'b32' } do
                 its('action.uniq') { should eq ['always'] }
                 its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            describe package('auditd') do
+                it { should be_installed }
             end
         end
     end
@@ -309,844 +309,1794 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
         end
     end
-    control 'V-75389' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75393' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75435' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75439' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75441' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75443' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75445' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75469' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75485' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75489' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75491' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75525' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75527' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75529' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75537' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75605' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75607' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75609' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75611' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75613' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75615' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75617' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-75621' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        log_file_path = input('log_file_path')
+        log_file_dir = input('log_file_dir')
+
+        if directory(log_file_dir).exist? do
+            available_storage = filesystem(log_file_dir).free_kb
+            log_file_size = file(log_file_path).size
+            standard_audit_log_size = input('standard_audit_log_size')
+        
+            describe ('Current audit log file size is less than the specified standard of ' + standard_audit_log_size.to_s) do
+                subject { log_file_size.to_i }
+                it { should be <= standard_audit_log_size }
+            end
+            describe ('Available storage for audit log should be more than the defined standard of ' + standard_audit_log_size.to_s) do
+                subject { available_storage.to_i }
+                it { should be > standard_audit_log_size }
+            end
+        else
+            it 'should have a log directory and file that exist' do
+                dir_failure_message = "Audit directory: #{log_file_dir} does not exist"
+                expect(directory(log_file_dir)).to exist, dir_failure_message
+                path_failure_message = "Audit path: #{log_file_path} does not exist"
+                expect(file(log_file_path)).to exist, path_failure_message
+            end
         end
     end
+
     control 'V-75623' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            space_left_action = auditd_conf.space_left_action
+            if space_left_action.casecmp?('email')
+                action_mail_acct = input('action_mail_acct')
+                describe auditd_conf do
+                    its('action_mail_acct') { should cmp action_mail_acct }
+                end
+            elsif space_left_action.casecmp?('syslog') || space_left_action.casecmp?('exec')
+                describe.one do
+                    describe auditd_conf do
+                        its('space_left_action') { should cmp 'syslog' }
+                    end
+                    describe auditd_conf do
+                        its('space_left_action') { should cmp 'exec' }
+                    end
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
-    end
+
     control 'V-75625' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        security_accounts = input('security_accounts').join('|')
+        if package('auditd').installed?
+            space_left_action = auditd_conf.space_left_action
+
+            describe 'System Administrator (SA) and Information System Security Officer (ISSO) are notified in the event of an audit processing failure' do
+                subject { security_accounts.include?(space_left_action) }
+                it { should be true }
+            end 
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
-    control 'V-75627' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75629' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75631' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75633' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-75635' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            log_file = auditd_conf.log_file
+            log_file_exists = !log_file.nil?
+            if log_file_exists
+                describe file(log_file) do
+                    it { should_not be_more_permissive_than('0600') }
+                end
+            else
+                describe ('Audit log file ' + log_file + ' exists') do
+                    subject { log_file_exists }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
-    control 'V-75637' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75639' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75641' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75643' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75645' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75647' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75653' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75655' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75657' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75659' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-75661' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/etc/passwd'
+
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75663' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/etc/group'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75665' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/etc/gshadow'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75667' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/etc/shadow'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75687' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/etc/security/opasswd'
+        if package('auditd').installed? and file(@audit_file).exist?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
+            it 'should have /etc/security/opasswd installed' do
+                failure_message = "/etc/security/opasswd is not present"
+                expect(file(@audit_file)).to exist, failure_message
+            end
         end
     end
+
     control 'V-75691' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/bin/su'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75693' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/chfn'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75695' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
+        # TEST-WIP
+        @audit_file = '/bin/mount'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
+        end 
     end
+
     control 'V-75697' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/bin/umount'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75699' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/ssh-agent'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75707' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/lib/openssh/ssh-keysign'
+        if package('auditd').installed?
+            
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+                
+                @perms = auditd.file(@audit_file).permissions
+                
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75709' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/sbin/insmod'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75711' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/sbin/rmmod'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75713' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/sbin/modprobe'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75715' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/bin/kmod'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75717' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('setxattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('setxattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75719' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('lsetxattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('lsetxattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75721' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fsetxattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('fsetxattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75723' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('removexattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('removexattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
+        
     end
+
     control 'V-75725' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('lremovexattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('lremovexattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75727' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fremovexattr').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('fremovexattr').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75729' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('chown').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('chown').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75731' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fchown').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('fchown').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75733' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fchownat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+                end
+                describe auditd.syscall('fchownat').where { arch == 'b32' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75735' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('lchown').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('lchown').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75737' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('chmod').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('chmod').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75739' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fchmod').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('fchmod').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75741' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('fchmodat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('fchmodat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75743' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('open').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('open').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('open').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('open').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75745' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('truncate').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('truncate').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('truncate').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('truncate').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75747' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('ftruncate').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('ftruncate').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('ftruncate').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('ftruncate').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75749' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('creat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('creat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('creat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('creat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75751' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('openat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('openat').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('openat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('openat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75753' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('open_by_handle_at').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EPERM' }
+                end
+                describe auditd.syscall('open_by_handle_at').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                    its('exit.uniq') { should include '-EACCES' }
+                end
+            end
+            describe auditd.syscall('open_by_handle_at').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EPERM' }
+            end
+            describe auditd.syscall('open_by_handle_at').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+                its('exit.uniq') { should include '-EACCES' }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75755' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/sudo'
+        if package('auditd').installed?
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75757' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/sudoedit'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75759' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/chsh'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75761' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/newgrp'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75765' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/sbin/apparmor_parser'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75767' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/setfacl'
+        if package('auditd').installed?
+
+        audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+        if audit_lines_exist
+            describe auditd.file(@audit_file) do
+                its('permissions') { should_not cmp [] }
+                its('action') { should_not include 'never' }
+            end
+
+            @perms = auditd.file(@audit_file).permissions
+
+            @perms.each do |perm|
+                describe perm do
+                    it { should include 'x' }
+                end
+            end
+        else
+            describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                subject { audit_lines_exist }
+                it { should be true }
+            end
+        end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75769' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/chacl'
+        if package('auditd').installed?
+
+        audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+        if audit_lines_exist
+            describe auditd.file(@audit_file) do
+                its('permissions') { should_not cmp [] }
+                its('action') { should_not include 'never' }
+            end
+
+            @perms = auditd.file(@audit_file).permissions
+
+            @perms.each do |perm|
+                describe perm do
+                    it { should include 'x' }
+                end
+            end
+        else
+            describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                subject { audit_lines_exist }
+                it { should be true }
+            end
+        end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75771' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/var/log/tallylog'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75773' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/var/log/faillog'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75775' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/var/log/lastlog'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'w' }
+                        it { should include 'a' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75777' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/passwd'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75779' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/sbin/unix_update'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75781' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/gpasswd'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75783' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/chage'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75785' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/sbin/usermod'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75787' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/crontab'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75789' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/sbin/pam_timestamp_check'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75791' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('init_module').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('init_module').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75793' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('finit_module').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('finit_module').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
+
     control 'V-75795' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        if package('auditd').installed?
+            if os.arch == 'x86_64'
+                describe auditd.syscall('delete_module').where { arch == 'b64' } do
+                    its('action.uniq') { should eq ['always'] }
+                    its('list.uniq') { should eq ['exit'] }
+                end
+            end
+            describe auditd.syscall('delete_module').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
-    control 'V-75803' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-75807' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-OWIP
+        ufw_status = command('ufw status').stdout.strip.lines.first
+        value = ufw_status != nil ? ufw_status.split(':')[1].strip : 'not installed'
+    
+        describe 'UFW status' do
+            subject { value }
+            it { should cmp 'active' }
+        end
+        describe 'Status listings for any allowed services, ports, or applications must be documented with the organization' do
+            skip 'Status listings checks must be preformed manually'
         end
     end
-    control 'V-75813' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75815' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75817' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-75819' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-OWIP
+        options = {
+            assignment_regex: /^\s*([^:]*?)\s*:\s*(.*?)\s*$/
+        }
+        describe.one do
+            describe command('dmesg | grep NX').stdout.strip do
+                it { should match /.+(NX \(Execute Disable\) protection: active)/ }
+            end
+            if file('/proc/cpuinfo').exist?
+                describe parse_config_file('/proc/cpuinfo', options).flags.split(' ') do
+                    it { should include 'nx' }
+                end  
+            end
         end
     end
-    control 'V-75821' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75823' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75825' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75829' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75831' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75837' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75859' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75863' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75869' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75897' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75903' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75905' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75907' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75909' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-75911' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-78005' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
-    control 'V-78007' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-80961' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-OWIP
+        space_left_percent = input('space_left_percent')
+        audit_log_path = input('log_file_dir')
+
+        if directory(audit_log_path).exist? do
+            describe filesystem(audit_log_path) do
+                its('percent_free') { should be >= space_left_percent }
+            end
+    
+            partition_threshold_mb = (filesystem(audit_log_path).size_kb / 1024 * 0.25).to_i
+            system_alert_configuration_mb = auditd_conf.space_left.to_i
+    
+            describe 'The space_left configuration' do
+                subject { system_alert_configuration_mb }
+                it { should >= partition_threshold_mb }
+            end
+           
+        else
+            it 'should have a log directory that exists' do
+                dir_failure_message = "Audit directory: #{audit_log_path} does not exist"
+                expect(directory(audit_log_path)).to exist, dir_failure_message
+            end
         end
     end
-    control 'V-80965' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        end
-    end
+
     control 'V-80969' do
-        impact 0.0
-        desc 'caveat', 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
-        describe 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy' do
-            skip 'This is Not Applicable since the related security control is not included in ***SPONSOR*** policy'
+        # TEST-WIP
+        @audit_file = '/usr/bin/chcon'
+        if package('auditd').installed?
+
+            audit_lines_exist = !auditd.lines.index { |line| line.include?(@audit_file) }.nil?
+            if audit_lines_exist
+                describe auditd.file(@audit_file) do
+                    its('permissions') { should_not cmp [] }
+                    its('action') { should_not include 'never' }
+                end
+
+                @perms = auditd.file(@audit_file).permissions
+
+                @perms.each do |perm|
+                    describe perm do
+                        it { should include 'x' }
+                    end
+                end
+            else
+                describe ('Audit line(s) for ' + @audit_file + ' exist') do
+                    subject { audit_lines_exist }
+                    it { should be true }
+                end
+            end
+        else
+            it 'should have auditd installed' do
+                failure_message = "Auditd is not installed"
+                expect(package('auditd')).to be_installed, failure_message
+            end
         end
     end
 end
