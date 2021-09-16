@@ -2150,7 +2150,8 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 it { should match /.+(NX \(Execute Disable\) protection: active)/ }
             end
             if file('/proc/cpuinfo').exist?
-                describe parse_config_file('/proc/cpuinfo', options).flags.split(' ') do
+                flags = parse_config_file('/proc/cpuinfo', options).flags != nil ? parse_config_file('/proc/cpuinfo', options).flags.split(' ') :  []
+                describe flags do
                     it { should include 'nx' }
                 end  
             end
