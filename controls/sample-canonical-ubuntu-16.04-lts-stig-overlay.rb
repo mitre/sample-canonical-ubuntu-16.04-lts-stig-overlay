@@ -315,7 +315,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         log_file_path = input('log_file_path')
         log_file_dir = input('log_file_dir')
 
-        if directory(log_file_dir).exist? do
+        if directory(log_file_dir).exist?
             available_storage = filesystem(log_file_dir).free_kb
             log_file_size = file(log_file_path).size
             standard_audit_log_size = input('standard_audit_log_size')
@@ -332,6 +332,8 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             it 'should have a log directory and file that exist' do
                 dir_failure_message = "Audit directory: #{log_file_dir} does not exist"
                 expect(directory(log_file_dir)).to exist, dir_failure_message
+            end
+            it 'should have a log file that exists' do
                 path_failure_message = "Audit path: #{log_file_path} does not exist"
                 expect(file(log_file_path)).to exist, path_failure_message
             end
@@ -2046,7 +2048,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         space_left_percent = input('space_left_percent')
         audit_log_path = input('log_file_dir')
 
-        if directory(audit_log_path).exist? do
+        if directory(audit_log_path).exist?
             describe filesystem(audit_log_path) do
                 its('percent_free') { should be >= space_left_percent }
             end
