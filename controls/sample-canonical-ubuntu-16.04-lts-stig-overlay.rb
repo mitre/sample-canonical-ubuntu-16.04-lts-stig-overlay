@@ -363,7 +363,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 expect(package('auditd')).to be_installed, failure_message
             end
         end
-
+    end
     control 'V-75625' do
         # TEST-WIP
         security_accounts = input('security_accounts').join('|')
