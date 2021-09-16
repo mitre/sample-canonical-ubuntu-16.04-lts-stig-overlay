@@ -315,7 +315,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         log_file_path = input('log_file_path')
         log_file_dir = input('log_file_dir')
 
-        if directory(log_file_dir).exist? do
+        if directory(log_file_dir).exist?
             available_storage = filesystem(log_file_dir).free_kb
             log_file_size = file(log_file_path).size
             standard_audit_log_size = input('standard_audit_log_size')
@@ -329,12 +329,14 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 it { should be > standard_audit_log_size }
             end
         else
-            it 'should have a log directory and file that exist' do
-                dir_failure_message = "Audit directory: #{log_file_dir} does not exist"
-                expect(directory(log_file_dir)).to exist, dir_failure_message
-                path_failure_message = "Audit path: #{log_file_path} does not exist"
-                expect(file(log_file_path)).to exist, path_failure_message
-            end
+            describe "" do
+                it 'should have a log directory and file that exist' do
+                    dir_failure_message = "Audit directory: #{log_file_dir} does not exist"
+                    expect(directory(log_file_dir)).to exist, dir_failure_message
+                    path_failure_message = "Audit path: #{log_file_path} does not exist"
+                    expect(file(log_file_path)).to exist, path_failure_message
+                end
+              end
         end
     end
 
@@ -358,9 +360,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+              end
             end
         end
     end
@@ -375,9 +379,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 it { should be true }
             end 
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -398,9 +404,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -432,9 +440,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -465,9 +475,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -498,9 +510,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+              end
             end
         end
     end
@@ -531,9 +545,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -564,9 +580,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
             it 'should have /etc/security/opasswd installed' do
                 failure_message = "/etc/security/opasswd is not present"
@@ -602,9 +620,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -636,9 +656,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -670,9 +692,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end 
     end
@@ -704,9 +728,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -738,9 +764,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -773,9 +801,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -805,9 +835,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -838,9 +870,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -871,9 +905,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -904,9 +940,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -925,9 +963,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -946,9 +986,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -967,9 +1009,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -988,9 +1032,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
         
@@ -1010,9 +1056,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1031,9 +1079,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1052,9 +1102,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1073,9 +1125,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1094,9 +1148,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                     its('list.uniq') { should eq ['exit'] }
                 end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1115,9 +1171,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1136,9 +1194,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1157,9 +1217,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1178,9 +1240,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1211,9 +1275,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1244,9 +1310,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1277,9 +1345,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1310,9 +1380,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1343,9 +1415,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1376,9 +1450,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('exit.uniq') { should include '-EACCES' }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1408,9 +1484,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1442,9 +1520,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1475,9 +1555,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1508,9 +1590,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1541,9 +1625,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1574,9 +1660,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
         end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1607,9 +1695,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
         end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1641,9 +1731,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1675,9 +1767,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1709,9 +1803,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1742,9 +1838,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1775,9 +1873,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1808,9 +1908,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1841,9 +1943,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1874,9 +1978,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1907,9 +2013,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1940,9 +2048,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+              end
             end
         end
     end
@@ -1961,9 +2071,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -1982,9 +2094,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+              end
             end
         end
     end
@@ -2003,9 +2117,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 its('list.uniq') { should eq ['exit'] }
             end
         else
-            it 'should have auditd installed' do
+            describe "The system with the capability to do auditing" do
+              it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
+            end
             end
         end
     end
@@ -2046,7 +2162,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
         space_left_percent = input('space_left_percent')
         audit_log_path = input('log_file_dir')
 
-        if directory(audit_log_path).exist? do
+        if directory(audit_log_path).exist?
             describe filesystem(audit_log_path) do
                 its('percent_free') { should be >= space_left_percent }
             end
@@ -2060,9 +2176,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
             end
            
         else
-            it 'should have a log directory that exists' do
-                dir_failure_message = "Audit directory: #{audit_log_path} does not exist"
-                expect(directory(audit_log_path)).to exist, dir_failure_message
+            describe 'The system with the capability to do auditing' do
+              it 'should have a log directory that exists' do
+                  dir_failure_message = "Audit directory: #{audit_log_path} does not exist"
+                  expect(directory(audit_log_path)).to exist, dir_failure_message
+              end
             end
         end
     end
@@ -2093,9 +2211,8 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 end
             end
         else
-            it 'should have auditd installed' do
-                failure_message = "Auditd is not installed"
-                expect(package('auditd')).to be_installed, failure_message
+            describe package('auditd') do
+                it { should be_installed }
             end
         end
     end
