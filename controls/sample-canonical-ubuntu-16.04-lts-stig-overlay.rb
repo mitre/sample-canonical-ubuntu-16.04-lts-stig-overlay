@@ -329,7 +329,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 it { should be > standard_audit_log_size }
             end
         else
-            describe "" do
+            describe "The system with the capability of log auditing" do
                 it 'should have a log directory and file that exist' do
                     dir_failure_message = "Audit directory: #{log_file_dir} does not exist"
                     expect(directory(log_file_dir)).to exist, dir_failure_message
@@ -1142,11 +1142,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                     its('action.uniq') { should eq ['always'] }
                     its('list.uniq') { should eq ['exit'] }
                 end
-                end
-                describe auditd.syscall('fchownat').where { arch == 'b32' } do
-                    its('action.uniq') { should eq ['always'] }
-                    its('list.uniq') { should eq ['exit'] }
-                end
+            end
+            describe auditd.syscall('fchownat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
         else
             describe "The system with the capability to do auditing" do
               it 'should have auditd installed' do
