@@ -584,11 +584,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
               it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
                 expect(package('auditd')).to be_installed, failure_message
-            end
-            end
-            it 'should have /etc/security/opasswd installed' do
-                failure_message = "/etc/security/opasswd is not present"
-                expect(file(@audit_file)).to exist, failure_message
+              end
+              it 'should have /etc/security/opasswd installed' do
+                  failure_message = "/etc/security/opasswd is not present"
+                  expect(file(@audit_file)).to exist, failure_message
+              end
             end
         end
     end
