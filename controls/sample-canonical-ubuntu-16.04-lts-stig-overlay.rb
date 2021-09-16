@@ -363,7 +363,7 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                 expect(package('auditd')).to be_installed, failure_message
             end
         end
-
+    end
     control 'V-75625' do
         # TEST-WIP
         security_accounts = input('security_accounts').join('|')
@@ -1088,11 +1088,11 @@ include_controls 'canonical-ubuntu-16.04-lts-stig-baseline' do
                     its('action.uniq') { should eq ['always'] }
                     its('list.uniq') { should eq ['exit'] }
                 end
-                end
-                describe auditd.syscall('fchownat').where { arch == 'b32' } do
-                    its('action.uniq') { should eq ['always'] }
-                    its('list.uniq') { should eq ['exit'] }
-                end
+            end
+            describe auditd.syscall('fchownat').where { arch == 'b32' } do
+                its('action.uniq') { should eq ['always'] }
+                its('list.uniq') { should eq ['exit'] }
+            end
         else
             it 'should have auditd installed' do
                 failure_message = "Auditd is not installed"
